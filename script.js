@@ -37,4 +37,12 @@ function playRound(computerSelection, playerSelection){
     return result;
 }
 
-console.log(playRound(computerSelection, playerSelection))
+function game(){
+    for(let i=0; i < 5; i++){
+        getComputerChoice();
+        computerSelection = getComputerChoice();
+        console.log(playRound(computerSelection,playerSelection));
+    }
+    return "Wow!"
+}
+
