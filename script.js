@@ -43,33 +43,32 @@ function game(){
     let computerScore = 0,
         playerScore = 0;
 
-    //for(let j=0;j < 1; j++){
-        for(let i=0; i < 5; i++){
-            getComputerChoice();
-            computerSelection = getComputerChoice();
+    for(let i=0; i < 5; i++){
+        getComputerChoice();
+        computerSelection = getComputerChoice();
             
-            console.log(playRound(computerSelection,playerSelection));
+        part = playRound(computerSelection, playerSelection).slice(0, 5);
 
-            
-            part = playRound(computerSelection, playerSelection).slice(0, 5);
-
-            if (part == 'You W') {
-                ++playerScore;
-            } else if (part == 'You L') {
-                ++computerScore;
-            } else {
-                playerScore += 0, 
-                computerScore += 0;
-            }
-        }
-
-        if (computerScore > playerScore) {
-            finalMessage = 'You lose the game =('; 
-        } else if (playerScore > computerScore) {
-            finalMessage = 'You won the game =)';
+        if (part == 'You W') {
+            ++playerScore;
+        } else if (part == 'You L') {
+            ++computerScore;
         } else {
-            finalMessage = 'Draw -_-';
+            playerScore += 0, 
+            computerScore += 0;
         }
+    
+        console.log(`${playRound(computerSelection,playerSelection)} Player: ${playerScore} | Computer ${computerScore}`);
+
+    }
+
+    if (computerScore > playerScore) {
+        finalMessage = 'You lose the game =('; 
+    } else if (playerScore > computerScore) {
+        finalMessage = 'You won the game =)';
+    } else {
+        finalMessage = 'Draw -_-';
+    }
 
     return finalMessage;
 }
