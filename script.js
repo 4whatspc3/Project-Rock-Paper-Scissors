@@ -17,6 +17,7 @@ function getComputerChoice() {
 let computerSelection = getComputerChoice();
 let playerSelection = 'rock';
 
+// to play a single round
 function playRound(computerSelection, playerSelection){
     // rename parameters to make comparisons easier
     const c = computerSelection,
@@ -37,12 +38,39 @@ function playRound(computerSelection, playerSelection){
     return result;
 }
 
+// to play a five round game
 function game(){
-    for(let i=0; i < 5; i++){
-        getComputerChoice();
-        computerSelection = getComputerChoice();
-        console.log(playRound(computerSelection,playerSelection));
-    }
-    return "Wow!"
+    let computerScore = 0,
+        playerScore = 0;
+
+    //for(let j=0;j < 1; j++){
+        for(let i=0; i < 5; i++){
+            getComputerChoice();
+            computerSelection = getComputerChoice();
+            
+            console.log(playRound(computerSelection,playerSelection));
+
+            
+            part = playRound(computerSelection, playerSelection).slice(0, 5);
+
+            if (part == 'You W') {
+                ++playerScore;
+            } else if (part == 'You L') {
+                ++computerScore;
+            } else {
+                playerScore += 0, 
+                computerScore += 0;
+            }
+        }
+
+        if (computerScore > playerScore) {
+            finalMessage = 'You lose the game =('; 
+        } else if (playerScore > computerScore) {
+            finalMessage = 'You won the game =)';
+        } else {
+            finalMessage = 'Draw -_-';
+        }
+
+    return finalMessage;
 }
 
