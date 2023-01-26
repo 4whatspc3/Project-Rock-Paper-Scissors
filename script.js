@@ -14,8 +14,17 @@ function getComputerChoice() {
     return rockPaperScissors[getRndInteger(min, max)];
 }
 
-let computerSelection = getComputerChoice();
-let playerSelection = 'rock';
+function getPlayerChoice() { 
+    let request = prompt('Chose your piece!'),
+    playerChoice = request.toLowerCase();
+    
+    while ((playerChoice != 'rock') && (playerChoice != 'paper') && (playerChoice != 'scissors')) {
+        request = prompt('Wrong word. Try again.'),
+        playerChoice = request.toLowerCase();
+    }
+
+    return playerChoice;
+}
 
 // to play a single round
 function playRound(computerSelection, playerSelection){
@@ -25,7 +34,7 @@ function playRound(computerSelection, playerSelection){
     // a new variable to store the result
     let result;
 
-    if (c === p) {
+    if (c == p) {
         result = `Draw`;
     } else if (c == 'rock' && p == 'scissors' || 
                c == 'paper' && p == 'rock' || 
@@ -41,11 +50,12 @@ function playRound(computerSelection, playerSelection){
 // to play a five round game
 function game(){
     let computerScore = 0,
-        playerScore = 0;
+        playerScore = 0,
+        finalMessage;
 
     for(let i=0; i < 5; i++){
-        getComputerChoice();
-        computerSelection = getComputerChoice();
+       let computerSelection = getComputerChoice(),
+           playerSelection = getPlayerChoice();
             
         part = playRound(computerSelection, playerSelection).slice(0, 5);
 
@@ -58,7 +68,9 @@ function game(){
             computerScore += 0;
         }
     
-        console.log(`${playRound(computerSelection,playerSelection)} Player: ${playerScore} | Computer ${computerScore}`);
+        console.log(`${playRound(computerSelection,playerSelection)}
+        
+        Player: ${playerScore} | Computer: ${computerScore}`);
 
     }
 
@@ -70,6 +82,8 @@ function game(){
         finalMessage = 'Draw -_-';
     }
 
-    return finalMessage;
+    return console.log(`${finalMessage}
+
+        Player: ${playerScore} | Computer: ${computerScore}`);
 }
 
