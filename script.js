@@ -47,7 +47,7 @@ function playRound(computerSelection, playerSelection){
     return result;
 }
 
-// to play a five round game
+/*to play a five round game
 function game(){
     let computerScore = 0,
         playerScore = 0,
@@ -86,4 +86,4 @@ function game(){
 
         Player: ${playerScore} | Computer: ${computerScore}`);
 }
-
+*/
