@@ -14,17 +14,26 @@ function getComputerChoice() {
     return rockPaperScissors[getRndInteger(min, max)];
 }
 
-function getPlayerChoice() { 
-    let request = prompt('Chose your piece!'),
-    playerChoice = request.toLowerCase();
-    
-    while ((playerChoice != 'rock') && (playerChoice != 'paper') && (playerChoice != 'scissors')) {
-        request = prompt('Wrong word. Try again.'),
-        playerChoice = request.toLowerCase();
-    }
 
-    return playerChoice;
-}
+const btn = document.querySelectorAll('button');
+
+let playerSelection;
+    
+    for (let i = 0; i < btn.length; i++) {
+        btn[i].addEventListener('click', (e) => {
+            if (e.target.matches('.rock')) {
+                playerSelection = 'rock';
+            } 
+            
+            if (e.target.matches('.paper')) {
+                playerSelection = 'paper';
+            } 
+            
+            if (e.target.matches('.scissors')) {
+                playerSelection = 'scissors';
+            }
+        });
+    }
 
 // to play a single round
 function playRound(computerSelection, playerSelection){
