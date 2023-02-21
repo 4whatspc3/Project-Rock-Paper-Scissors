@@ -14,32 +14,13 @@ function getComputerChoice() {
     return rockPaperScissors[getRndInteger(min, max)];
 }
 
-
-const btn = document.querySelectorAll('button');
-
-let playerSelection;
-    
-    for (let i = 0; i < btn.length; i++) {
-        btn[i].addEventListener('click', (e) => {
-            if (e.target.matches('.rock')) {
-                playerSelection = 'rock';
-            } 
-            
-            if (e.target.matches('.paper')) {
-                playerSelection = 'paper';
-            } 
-            
-            if (e.target.matches('.scissors')) {
-                playerSelection = 'scissors';
-            }
-        });
-    }
-
 // to play a single round
-function playRound(computerSelection, playerSelection){
+function playRound(){
     // rename parameters to make comparisons easier
-    const c = computerSelection,
-          p = playerSelection;
+    let c = getComputerChoice();
+    console.log(`a maquina pegou ${c}`)
+    let p = playerSelection;
+    
     // a new variable to store the result
     let result;
 
@@ -54,6 +35,28 @@ function playRound(computerSelection, playerSelection){
     }
 
     return result;
+}
+
+
+const btn = document.querySelectorAll('button');
+
+for (let i = 0; i < btn.length; i++) {
+    btn[i].addEventListener('click', (e) => {
+        if (e.target.matches('.rock')) {
+            playerSelection = 'rock';
+            console.log(playRound())
+        } 
+        
+        if (e.target.matches('.paper')) {
+            playerSelection = 'paper';
+            console.log(playRound())
+        } 
+        
+        if (e.target.matches('.scissors')) {
+            playerSelection = 'scissors';
+            console.log(playRound())
+        }
+    });
 }
 
 /*to play a five round game
