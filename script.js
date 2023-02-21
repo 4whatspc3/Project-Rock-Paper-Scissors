@@ -44,17 +44,20 @@ for (let i = 0; i < btn.length; i++) {
     btn[i].addEventListener('click', (e) => {
         if (e.target.matches('.rock')) {
             playerSelection = 'rock';
-            console.log(playRound())
+            const content = document.querySelector('div');
+            content.textContent = `${playRound()}`;
         } 
         
         if (e.target.matches('.paper')) {
             playerSelection = 'paper';
-            console.log(playRound())
+            const content = document.querySelector('div');
+            content.textContent = `${playRound()}`;
         } 
         
         if (e.target.matches('.scissors')) {
             playerSelection = 'scissors';
-            console.log(playRound())
+            const content = document.querySelector('div');
+            content.textContent = `${playRound()}`;
         }
     });
 }
