@@ -1,4 +1,3 @@
-
 function getComputerChoice() {
     // get a random number
     const min = 0,
@@ -37,30 +36,58 @@ function playRound(){
     return result;
 }
 
+function result(){
+    
+    const content = document.querySelector('div');
+
+    const score = document.createElement('div');
+
+    score.classList.add('score');
+
+    score.textContent = `Player: ${playerScore} | Computer: ${computerScore}`;
+
+    return content.appendChild(score);
+}
 
 const btn = document.querySelectorAll('button');
 
-for (let i = 0; i < btn.length; i++) {
-    btn[i].addEventListener('click', (e) => {
+let count = 0,
+    computerScore = 0,
+    playerScore = 0,
+    part;
+
+btn.forEach(button => {
+    
+    button.addEventListener('click', (e) => {
+        
         if (e.target.matches('.rock')) {
             playerSelection = 'rock';
-            const content = document.querySelector('div');
-            content.textContent = `${playRound()}`;
-        } 
-        
+        }
+
         if (e.target.matches('.paper')) {
             playerSelection = 'paper';
-            const content = document.querySelector('div');
-            content.textContent = `${playRound()}`;
-        } 
-        
+        }
+
         if (e.target.matches('.scissors')) {
             playerSelection = 'scissors';
-            const content = document.querySelector('div');
-            content.textContent = `${playRound()}`;
         }
+
+        part = playRound().slice(0, 5);
+
+        if (part == 'You W') {
+            ++playerScore;
+        } else if (part == 'You L') {
+            ++computerScore;
+        } else {
+            playerScore += 0, 
+            computerScore += 0;
+        }
+
+        result();
+
+        console.log(count++)
     });
-}
+})
 
 /*to play a five round game
 function game(){
