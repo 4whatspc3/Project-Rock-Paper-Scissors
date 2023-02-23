@@ -49,6 +49,12 @@ function result(){
     return content.appendChild(score);
 }
 
+function empty(element) {
+    while(element.firstElementChild) {
+        element.firstElementChild.remove();
+    }
+}
+
 const btn = document.querySelectorAll('button');
 
 let count = 0,
@@ -85,7 +91,23 @@ btn.forEach(button => {
 
         result();
 
-        console.log(count++)
+        if (playerScore == 5) {
+            const content = document.querySelector('.content');
+
+            playerScore = 0;
+            computerScore = 0;
+            
+            empty(content);
+        }
+
+        if (computerScore == 5) {
+            const content = document.querySelector('.content');
+
+            playerScore = 0;
+            computerScore = 0;
+            
+            empty(content);
+        }
     });
 })
 
