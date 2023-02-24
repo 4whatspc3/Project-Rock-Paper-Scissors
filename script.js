@@ -14,10 +14,9 @@ function getComputerChoice() {
 }
 
 // to play a single round
-function playRound(){
+function playRound(computerSelection, playerSelection){
     // rename parameters to make comparisons easier
-    let c = getComputerChoice();
-    console.log(`a maquina pegou ${c}`)
+    let c = computerSelection;
     let p = playerSelection;
     
     // a new variable to store the result
@@ -36,31 +35,38 @@ function playRound(){
     return result;
 }
 
-function result(){
-    
+function result(computerSelection, playerSelection){
+
     const content = document.querySelector('div');
 
-    const score = document.createElement('div');
+    content.textContent = `${playRound(computerSelection,playerSelection)}
+        
+    Player: ${playerScore} | Computer: ${computerScore}`;
 
-    score.classList.add('score');
-
-    score.textContent = `Player: ${playerScore} | Computer: ${computerScore}`;
-
-    return content.appendChild(score);
+    return content;
 }
 
-function empty(element) {
-    while(element.firstElementChild) {
-        element.firstElementChild.remove();
-    }
+function finalMessage(){
+    const content = document.querySelector('div');
+
+    const message = document.createElement('div');
+
+    message.classList.add('message');
+
+    message.textContent = `${finalText}
+    
+    Click any button to start again!`;
+
+    return content.appendChild(message);
 }
 
 const btn = document.querySelectorAll('button');
 
-let count = 0,
+let count = false,
     computerScore = 0,
     playerScore = 0,
-    part;
+    part,
+    finalText;
 
 btn.forEach(button => {
     
@@ -78,49 +84,8 @@ btn.forEach(button => {
             playerSelection = 'scissors';
         }
 
-        part = playRound().slice(0, 5);
+        let computerSelection = getComputerChoice();
 
-        if (part == 'You W') {
-            ++playerScore;
-        } else if (part == 'You L') {
-            ++computerScore;
-        } else {
-            playerScore += 0, 
-            computerScore += 0;
-        }
-
-        result();
-
-        if (playerScore == 5) {
-            const content = document.querySelector('.content');
-
-            playerScore = 0;
-            computerScore = 0;
-            
-            empty(content);
-        }
-
-        if (computerScore == 5) {
-            const content = document.querySelector('.content');
-
-            playerScore = 0;
-            computerScore = 0;
-            
-            empty(content);
-        }
-    });
-})
-
-/*to play a five round game
-function game(){
-    let computerScore = 0,
-        playerScore = 0,
-        finalMessage;
-
-    for(let i=0; i < 5; i++){
-       let computerSelection = getComputerChoice(),
-           playerSelection = getPlayerChoice();
-            
         part = playRound(computerSelection, playerSelection).slice(0, 5);
 
         if (part == 'You W') {
@@ -131,23 +96,21 @@ function game(){
             playerScore += 0, 
             computerScore += 0;
         }
-    
-        console.log(`${playRound(computerSelection,playerSelection)}
-        
-        Player: ${playerScore} | Computer: ${computerScore}`);
 
-    }
+        result(computerSelection, playerSelection);
 
-    if (computerScore > playerScore) {
-        finalMessage = 'You lose the game =('; 
-    } else if (playerScore > computerScore) {
-        finalMessage = 'You won the game =)';
-    } else {
-        finalMessage = 'Draw -_-';
-    }
+        if (playerScore == 5) {
+            finalText = 'You won the game =)';
+            finalMessage();
+            
+            playerScore = 0;
+            computerScore = 0;
+        } else if (computerScore == 5) {
+            finalText = 'You lose the game =(';
+            finalMessage();
 
-    return console.log(`${finalMessage}
-
-        Player: ${playerScore} | Computer: ${computerScore}`);
-}
-*/
+            playerScore = 0;
+            computerScore = 0;
+        }
+    });
+})
